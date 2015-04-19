@@ -18,21 +18,26 @@ if (mysqli_connect_errno())
   }
 	 $user_id = $_POST["user_id"];
    
-   $query = "SELECT interests FROM user_interest where user_id='$user_id';";
+   $query = "SELECT interests FROM user_interest where user_id='$user_id'";
    $result = mysqli_query($link,$query);
   
    $count = mysqli_affected_rows($link);
    
     if($count > 0)
      {
-	 $output["result"] = "Get other user interest success";
+	     $output["result"] = "Get other user interest success";
+
+       if ($_REQUEST["flag"] == 1) {
+          $output["result"] = "Get other user interest success - notification";
+       }
+
        while ($row = mysqli_fetch_row($result)) {
-			$output["interests"] = $row[0];
-		}
+    			 $output["interests"] = $row[0];
+    		}
      }
      else
      {
-       $output["interests"] = "Get other user interest Failed"; 
+       $output["interests"] = "Get other user interest Failed - notification"; 
      }
 
      print(json_encode($output));
