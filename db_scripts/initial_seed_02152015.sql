@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS connectify.interest
 (
    interest_id int NOT NULL,
    interest_name varchar(255),
-   interest_image blob NOT NULL,
+   interest_image blob,
    PRIMARY KEY (interest_id)
 );
 
@@ -43,7 +43,12 @@ VALUES
 (1,'cricket',LOAD_FILE('D:/cricket.jpg'));
 
 
-
-
-
 select interest_image from connectify.interest;
+
+INSERT INTO connectify.interest
+(interest_id,interest_name)
+VALUES(1,'cricket');
+
+UPDATE connectify.interest
+SET interest_image = LOAD_FILE('C:/stuff/cricket.jpg')
+WHERE interest_id = 1;
